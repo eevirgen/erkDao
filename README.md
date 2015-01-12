@@ -21,7 +21,6 @@ We have a DAOFactory which includes a Map which holds DAO instance which has bee
 Basically it creates our myDAO Object
 
 ```
-#!java
 	@SuppressWarnings("unchecked")
 	public <T> T getDAO(Class<T> klass) {
 		if (!klass.isInterface()) {
@@ -45,8 +44,6 @@ The proxy design pattern allows you to provide an interface to other objects by 
 I used  java.lang.reflect.Proxy.newProxyInstance to achieve that :
 
 ```
-#!java
-
        protected Object createDAO(Class<?> klass) {
 		// Proxy instance has been created. To interception 
 		DAOProxy proxy = new DAOProxy(connectionProvider, configuration);
@@ -59,7 +56,6 @@ I used  java.lang.reflect.Proxy.newProxyInstance to achieve that :
 **DAOProxy** class is so important. It is used by JVM :
 
 ```
-#!java
         // We intercept when MYDao interface method calls. these methods runs JVM.
 	// We have to know which execution we have to execute. So we get method name
 	@Override
@@ -90,8 +86,6 @@ I created an ExecutionDate POJO. And when date propery change, it notifies All O
 
 
 ```
-#!java
-
    public void setDate(java.util.Date date) {
 	   this.date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS").format(date);
 	   notifyAllObservers();
@@ -113,16 +107,13 @@ And in QueryHandler (which is executes created queries) I changed the execution 
 In QueryHandler construction:
 
 ```
-#!java
 new ExecutionDateObserver(executionDate);
 ```
 
 and after statement.
 ```
-#!java
 pstmt.executeUpdate();
 executionDate.setDate(new Date());
-
 ```
 
 Remember it is only about to apply Observer Pattern. I have no any other point to do that.
@@ -135,8 +126,6 @@ The intent of the Builder design pattern is to separate the construction of a co
 Please note our DB Connection provider needs aconfiguration which is build in constructor. And it has no setters :
 
 ```
-#!java
-
 package com.erkspace.erkSimpleDAO.builder;
 
 public class Configuration {
@@ -189,7 +178,6 @@ public class Configuration {
 				+ ", url=" + url + "]";
 	}
 }
-
 ```
 ### Provider Pattern ###
 
@@ -199,7 +187,6 @@ We have ConnectionProvider which is an interface and its implementation Connecti
 
 
 ```
-#!java
 package com.erkspace.erkSimpleDAO.provider;
 
 import java.sql.Connection;
@@ -212,14 +199,9 @@ public interface ConnectionProvider {
 	public Connection getConnection(Configuration configuration) throws SQLException;
 }
 ```
-
 and 
 
-
 ```
-#!java
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -236,7 +218,6 @@ public class ConnectionProviderDefaultImplementation implements ConnectionProvid
 }
 
 ```
-
 and last one 
 
 ### Strategy Pattern ###
@@ -246,8 +227,6 @@ We have an interface :
 
 
 ```
-#!java
-
 package com.erkspace.erkSimpleDAO.strategy;
 
 public interface Strategy {
@@ -261,7 +240,6 @@ public interface Strategy {
 And Context :
 
 ```
-#!java
 package com.erkspace.erkSimpleDAO.strategy;
 
 public class Context {
@@ -278,13 +256,10 @@ public class Context {
 }
 
 ```
-
 And our Insert and Update strategies :
 (Please note they extends QueryHandler and implements Strategy )
 
-
 ```
-#!java
 package com.erkspace.erkSimpleDAO.strategy;
 
 import com.erkspace.erkSimpleDAO.builder.Configuration;
@@ -341,13 +316,9 @@ public class UpdateStrategy extends QueryHandler implements Strategy {
 }
 
 ```
-
 And of course we have a demo to show it! 
 
-
 ```
-#!java
-
 package com.erkspace.erkSimpleDAO.strategy;
 
 import com.erkspace.erkSimpleDAO.builder.Configuration;
@@ -390,11 +361,9 @@ public class StrategyPatternDemo {
 }
 
 ```
+The project is also pretty close to the Open Close Principle. You can easily add a new Model which refers to a mySql table, And add a new insert/update/delete method on myDAO interface which pass the Model and you can use it. 
+Connection provider can be also extendable. QueryHandler needs some modifications.
 
-the project is also close to the Open Close principles. You can easily add a new Model which refers to a mySql table, And add a new insert/update/delete method on myDAO interface which pass the Model. And you can use it. And connection provider can be also extendable. 
+Enjoy!
 
-In OCP point of view QueryHandler needs some modifications.
-
-
-Enjoy!,
 erk
