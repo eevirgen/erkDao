@@ -44,7 +44,7 @@ The proxy design pattern allows you to provide an interface to other objects by 
 I used  java.lang.reflect.Proxy.newProxyInstance to achieve that :
 
 ```
-       protected Object createDAO(Class<?> klass) {
+	protected Object createDAO(Class<?> klass) {
 		// Proxy instance has been created. To interception 
 		DAOProxy proxy = new DAOProxy(connectionProvider, configuration);
 		ClassLoader cl = getClass().getClassLoader();
@@ -56,7 +56,7 @@ I used  java.lang.reflect.Proxy.newProxyInstance to achieve that :
 **DAOProxy** class is so important. It is used by JVM :
 
 ```
-        // We intercept when MYDao interface method calls. these methods runs JVM.
+	// We intercept when MYDao interface method calls. these methods runs JVM.
 	// We have to know which execution we have to execute. So we get method name
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
