@@ -7,7 +7,7 @@ Created a simple Object Persistence Framework called erkut DAO. I hope it can gi
 
 Includes only insert, update and delete operations. And limited with INT and VARCHAR datatypes of mySql.
 
-If you are wavering between the Hibernate and erkDAO, I strongly recommend Hibernate. :P
+If you are wavering between the Hibernate and erkut DAO, I strongly recommend Hibernate. :P
 
 ## Challenges ##
 * Factory Pattern,  Proxy Pattern, Observer Pattern, Builder Pattern, Provider Pattern and Strategy Pattern are **MUST**
