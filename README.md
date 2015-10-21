@@ -3,7 +3,7 @@
 
 **a draft for training some Design Patterns**
 
-Created a simple Object Persistence Framework called erkDAO. I hope it can give an idea  to someone to create his/her [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) :) or trying to learn some critical Design Pattern topics. It is simple, useful and only a draft. 
+Created a simple Object Persistence Framework called erkut DAO. I hope it can give an idea  to someone to create his/her [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) :) or trying to learn some critical Design Pattern topics. It is simple, useful and only a draft. 
 
 Includes only insert, update and delete operations. And limited with INT and VARCHAR datatypes of mySql.
 
