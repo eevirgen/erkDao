@@ -1,4 +1,4 @@
-# erkDAO  #
+# erkut DAO  #
 ## - Simple Object Persistence Framework - ##
 
 **a draft for training some Design Patterns**
